@@ -24,7 +24,7 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
-        <form action="/comment/createComment" method="POST">
+        <form action="/comment/createComment/<%=post._id%>" method="POST">
           
           <div class="mb-3">
             <label for="caption" class="form-label">Caption</label>

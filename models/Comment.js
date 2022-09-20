@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const CommentSchema = new mongoose.Schema({
   
-  caption: {
+  comment: {
     type: String,
     required: true,
   },
@@ -12,7 +12,7 @@ const CommentSchema = new mongoose.Schema({
   },
   post: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "post",
+    ref: "Post",
   },
   createdAt: {
     type: Date,
