@@ -1,6 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
-
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -28,7 +28,7 @@ module.exports = {
       console.log(err);
     }
   },
-  createPost: async (req, res) => {
+  createComment: async (req, res) => {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);

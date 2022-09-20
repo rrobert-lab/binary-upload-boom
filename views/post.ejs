@@ -19,9 +19,21 @@
           method="POST"
           class="col-3"
         >
+
+
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+        <form action="/comment/createComment" method="POST">
+          
+          <div class="mb-3">
+            <label for="caption" class="form-label">Caption</label>
+            <textarea class="form-control" id="comment" name="comment"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+        </form>
+
       </div>
     </div>
     <div class="col-3 mt-5">
