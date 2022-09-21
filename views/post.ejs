@@ -57,6 +57,14 @@
           <button class="btn btn-primary fa fa-heart" type="submit"></button>
         </form>
         Likes: <%= el.likes %>
+
+        <form
+          action="/comment/deleteComment/<%=post.id%>/<%=el._id%>?_method=DELETE"
+          method="POST"
+          class="col-3">        
+          <button class="btn btn-primary fa fa-trash" type="submit"></button>
+          
+        </form>
         </li>
         <%})%>
       </ul>
