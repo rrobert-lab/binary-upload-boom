@@ -1,46 +1,103 @@
 <%- include('partials/header') -%>
+<div id="issMap"></div>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost/:id" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
+      
+      
+   
+   
+      <script>
+        var a= 0;
+        var b= 0;
+        // Making a map and tiles
+        
+        
+       var maxBounds = L.latLngBounds(
+        L.latLng( 40.700, -74.41), //Southwest
+        L.latLng(40.770, -73.541)  //Northeast
+    );// can be changed by state
+        const mymap = L.map('issMap', {
+          'center': [40.7279101090076, -73.9925114575458],
+          'zoom': 14,
+          'maxBounds': maxBounds
+      });
+      
+
+        //replace with NYC map
+        const attribution =
+          '&copy; <a href="https://maps{s}.nyc.gov/xyz/1.0.0/carto/basemap/{z}/{x}/{y}.jpg">OpenStreetMap</a> contributors';
+  
+        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const tiles = L.tileLayer(tileUrl, { attribution });
+        tiles.addTo(mymap);
+  
+        // Making a marker with a custom icon
+        var greenIcon = L.icon({
+          iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
+          shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+      
+          iconSize:     [38, 40], // size of the icon
+          shadowSize:   [50, 30], // size of the shadow
+          iconAnchor:   [22, 41], // point of the icon which will correspond to marker's location
+          shadowAnchor: [4, 31],  // the same for the shadow
+          popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      });
+      L.marker([40.7279101090076, -73.9925114575458], {icon: greenIcon,
+        draggable: true,
+        autoPan: true,
+        nameValue: ""     
+      }).bindTooltip(name,
+      {
+          permanent: true,
+          direction: 'right'
+      }).addTo(mymap).on('click', function(e) {
+        alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);});
+
+      //Leaflet Draw Event
+      mymap.on('dblclick', function(event){
+        mymap.clicked = 0;
+        
+        console.log("working");
+
+        L.marker([event.latlng.lat, event.latlng.lng], {icon: greenIcon,
+          draggable: true,
+          autoPan: true,
+          nameValue: ""     
+        }).bindTooltip(name,
+        {
+            permanent: true,
+            direction: 'right'
+        }).addTo(mymap).on('click', function(e) {
+          alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);});})
+  
+             
+       
+
+
+      
+      </script> 
+     
+      <p class="left">
+        latitude: <span id="lat"></span>°<br />
+        longitude: <span id="lon"></span>°
+      </p>
+
+      <section class="right row">
+        <div class="col s20 push-s1000">
+            <p><strong>User Name</strong>: <%= user.userName %></p>
+            <p><strong>Email</strong>: <%= user.email %></p>
+        </div>
+       
+    </section>
+      <p class="right col s6 push-s1">
+      <a href="/logout" class="btn-floating btn-large waves-effect waves-light red "> 
+
+        <i class="material-icons">exit_to_app</i>
+      </a>
+      </p>
       </div>  
     </div>
   </div>
+
 </div>
 <%- include('partials/footer') -%>
