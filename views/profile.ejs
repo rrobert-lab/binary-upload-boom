@@ -1,5 +1,5 @@
 <%- include('partials/header') -%>
-<div class="center"><h5> double click on map to let people know you are leaving a spot</h5></div>
+<div class="center"><h5> <strong>Double click on map and submit to let people know you are leaving a spot</strong></h5></div>
 
 
 <div class="container">
@@ -75,9 +75,6 @@
      
       //Leaflet another Draw Event
       var marker;
-
-  
-
       mymap.on('dblclick', function(event){
              mymap.clicked = 0;
 
@@ -85,19 +82,15 @@
              if (mymap.hasLayer(marker)) {
               mymap.removeLayer(marker); // remove
           }
-             
-            
-             
-        
-//clear 
-const list = document.getElementById("userName")
+ 
+const Uname = document.getElementById("userName")
 //adding marker
        marker= L.marker([event.latlng.lat, event.latlng.lng], {icon: greenIcon,
         
           draggable: true,
           autoPan: true,
                
-        }).bindTooltip(userName,
+        }).bindTooltip(Uname,
         {
             permanent: true,
             direction: 'right'
@@ -122,8 +115,8 @@ const list = document.getElementById("userName")
 
       <section class="right row">
         <div class="col s20 push-s1000">
-            <p><strong>User Name</strong><section id="userName">: <%= user.userName %></section></p>
-            <p><strong>Email</strong>: <%= user.email %></p>
+            <p hidden><span id="userName">User Name: <%= user.userName %></span></p>
+            <p><span>User Name: <%= user.userName %></span></p>
         </div>
        
     </section>
