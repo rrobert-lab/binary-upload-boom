@@ -1,5 +1,5 @@
 <%- include('partials/header') -%>
-<div class="center"><h5> <strong>Double click on map and submit to let people know you are leaving a spot</strong></h5></div>
+<div class="center"><h5> <strong> <%= user.userName %> Double click on map and submit to let people know you are leaving a spot</strong></h5></div>
 
 
 <div class="container">
@@ -9,18 +9,30 @@
   <ul>
     <li><p class="right col s6 push-s1">
       <a href="/logout" class="btn-floating btn-large waves-effect waves-light red "> 
-       EXIT
-      </a>
-      </p></li>
+       EXIT </a></p></li>
     <li><a href="#" class="btn-floating blue 
-      btn-large">submit</a></li>
+      btn-large">exmple</a></li>
 
 
-    
+      <li><a href="#" class="btn-floating blue 
+        btn-large" type="submit">
+      <form
+          action="/coordinate/location/323123/32132132?_method=PUT"
+          method="POST"
+        >submit</form></a></li>
+        
+    <li>
+        <form
+          class="col-1"
+          action="/coordinate/location/323123/32132132?_method=PUT  "
+          method="POST"
+        >
+          <button class="btn btn-primary fa fa-check" type="submit"></button>
+        </form>
+      </li>
     
   </ul>
 </div>
-
 
 
   <div id="issMap"></div>
@@ -76,8 +88,10 @@
       //Leaflet another Draw Event
       var marker;
       mymap.on('dblclick', function(event){
-             mymap.clicked = 0;
-
+             
+             document.getElementById("latitude").innerHTML = event.latlng.lat;
+             document.getElementById("longitude").innerHTML = event.latlng.lng;
+          
              //only allows one marker wahoo-it works
              if (mymap.hasLayer(marker)) {
               mymap.removeLayer(marker); // remove
@@ -87,7 +101,7 @@ const Uname = document.getElementById("userName")
 //adding marker
        marker= L.marker([event.latlng.lat, event.latlng.lng], {icon: greenIcon,
         
-          draggable: true,
+          draggable: false,
           autoPan: true,
                
         }).bindTooltip(Uname,
@@ -96,29 +110,28 @@ const Uname = document.getElementById("userName")
             direction: 'right'
             
         }).addTo(mymap).on('click', function(e) {
-          alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);})
-          let ab={}
-       
-   console.log(username); 
-          ;})
-          document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.fixed-action-btn');
-            var instances = M.FloatingActionButton.init(elems, {
-              direction: 'left'
-            });
-          });
+          alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);
+          document.getElementById("latitude").innerHTML = e.latlng.lat;
+        
+        })
           
+        
+          ;})
+         
+         
 
       </script> 
      
-     
 
-      <section class="right row">
+    </div class="left"><br>
+    <div>latitude: <span id="latitude"></span></div><br>
+    <div>longitude: <span id="longitude"></span></div>
+<div></div>
+    <section class="right row">
         <div class="col s20 push-s1000">
             <p hidden><span id="userName">User Name: <%= user.userName %></span></p>
-            <p><span>User Name: <%= user.userName %></span></p>
-        </div>
-       
+            
+
     </section>
       
       </div>  

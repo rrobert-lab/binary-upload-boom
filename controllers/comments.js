@@ -5,6 +5,7 @@ module.exports = {
   
   createComment: async (req, res) => {
     try {
+      
       // Upload image to cloudinary
         await Comment.create({
         comment: req.body.comment,
