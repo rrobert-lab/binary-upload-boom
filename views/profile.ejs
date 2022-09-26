@@ -1,12 +1,39 @@
 <%- include('partials/header') -%>
-<div id="issMap"></div>
+<div class="center"><h5> double click on map to let people know you are leaving a spot</h5></div>
+
+
 <div class="container">
+ <!-- FIXED ACTION BUTTON -->
+ <div class="fixed-action-btn">
+  <a href="#" class="btn-floating red btn-large"><i class="large material-icons">mode_edit</i></a>
+  <ul>
+    <li><p class="right col s6 push-s1">
+      <a href="/logout" class="btn-floating btn-large waves-effect waves-light red "> 
+       EXIT
+      </a>
+      </p></li>
+    <li><a href="#" class="btn-floating blue 
+      btn-large">submit</a></li>
+
+
+    
+    
+  </ul>
+</div>
+
+
+
+  <div id="issMap"></div>
   <div class="row mt-5">
       
       
    
    
       <script>
+        //first part of adding markers to group
+        var nyc = L.marker([40.7279101090076, -73.9925114575458]).bindPopup('nyc');
+        var marky = L.layerGroup([nyc]);
+        
         var a= 0;
         var b= 0;
         // Making a map and tiles
@@ -19,9 +46,11 @@
         const mymap = L.map('issMap', {
           'center': [40.7279101090076, -73.9925114575458],
           'zoom': 14,
-          'maxBounds': maxBounds
+          'maxBounds': maxBounds,
+         
       });
-      
+      //delete markers
+     
 
         //replace with NYC map
         const attribution =
@@ -30,7 +59,8 @@
         const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
         const tiles = L.tileLayer(tileUrl, { attribution });
         tiles.addTo(mymap);
-  
+        //second part of adding markers to layer
+        mymap.layers=[mymap,marky]
         // Making a marker with a custom icon
         var greenIcon = L.icon({
           iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
@@ -42,59 +72,62 @@
           shadowAnchor: [4, 31],  // the same for the shadow
           popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
       });
-      L.marker([40.7279101090076, -73.9925114575458], {icon: greenIcon,
-        draggable: true,
-        autoPan: true,
-        nameValue: ""     
-      }).bindTooltip(name,
-      {
-          permanent: true,
-          direction: 'right'
-      }).addTo(mymap).on('click', function(e) {
-        alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);});
+     
+      //Leaflet another Draw Event
+      var marker;
 
-      //Leaflet Draw Event
+  
+
       mymap.on('dblclick', function(event){
-        mymap.clicked = 0;
-        
-        console.log("working");
+             mymap.clicked = 0;
 
-        L.marker([event.latlng.lat, event.latlng.lng], {icon: greenIcon,
+             //only allows one marker wahoo-it works
+             if (mymap.hasLayer(marker)) {
+              mymap.removeLayer(marker); // remove
+          }
+             
+            
+             
+        
+//clear 
+const list = document.getElementById("userName")
+//adding marker
+       marker= L.marker([event.latlng.lat, event.latlng.lng], {icon: greenIcon,
+        
           draggable: true,
           autoPan: true,
-          nameValue: ""     
-        }).bindTooltip(name,
+               
+        }).bindTooltip(userName,
         {
             permanent: true,
             direction: 'right'
+            
         }).addTo(mymap).on('click', function(e) {
-          alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);});})
-  
-             
+          alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);})
+          let ab={}
        
+   console.log(username); 
+          ;})
+          document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.fixed-action-btn');
+            var instances = M.FloatingActionButton.init(elems, {
+              direction: 'left'
+            });
+          });
+          
 
-
-      
       </script> 
      
-      <p class="left">
-        latitude: <span id="lat"></span>°<br />
-        longitude: <span id="lon"></span>°
-      </p>
+     
 
       <section class="right row">
         <div class="col s20 push-s1000">
-            <p><strong>User Name</strong>: <%= user.userName %></p>
+            <p><strong>User Name</strong><section id="userName">: <%= user.userName %></section></p>
             <p><strong>Email</strong>: <%= user.email %></p>
         </div>
        
     </section>
-      <p class="right col s6 push-s1">
-      <a href="/logout" class="btn-floating btn-large waves-effect waves-light red "> 
-
-        <i class="material-icons">exit_to_app</i>
-      </a>
-      </p>
+      
       </div>  
     </div>
   </div>
