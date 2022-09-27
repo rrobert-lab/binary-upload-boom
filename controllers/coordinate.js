@@ -12,7 +12,7 @@ module.exports = {
       lad: req.params.lad,
       user: req.user.id,
     });
-    console.log("Post has been added!");
+  
     res.redirect("/profile");
   } catch (err) {
     console.log(err);

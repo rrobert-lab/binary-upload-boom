@@ -10,38 +10,27 @@
     <li><p class="right col s6 push-s1">
       <a href="/logout" class="btn-floating btn-large waves-effect waves-light red "> 
        EXIT </a></p></li>
-    <li><a href="#" class="btn-floating blue 
-      btn-large">exmple</a></li>
-
-
-      <li><a href="#" class="btn-floating blue 
-        btn-large" type="submit">
-      <form
-          action="/coordinate/location/323123/32132132?_method=PUT"
-          method="POST"
-        >submit</form></a></li>
-        
-    <li>
-        <form
+    <li hidden><a href="#" class="btn-floating blue 
+      btn-large">example</a></li>
+   <li> <form id=theFormId
+    method="POST" 
           class="col-1"
-          action="/coordinate/location/323123/32132132?_method=PUT  "
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-check" type="submit"></button>
+         >
+          <button class="btn-floating yellow darken-4 btn-large" type="submit">submit</button>
         </form>
       </li>
+
+      
     
   </ul>
 </div>
-
-
+      <!-- map -->
   <div id="issMap"></div>
   <div class="row mt-5">
-      
-      
-   
-   
-      <script>
+    
+
+
+          <script>
         //first part of adding markers to group
         var nyc = L.marker([40.7279101090076, -73.9925114575458]).bindPopup('nyc');
         var marky = L.layerGroup([nyc]);
@@ -61,7 +50,7 @@
           'maxBounds': maxBounds,
          
       });
-      //delete markers
+      //
      
 
         //replace with NYC map
@@ -91,12 +80,20 @@
              
              document.getElementById("latitude").innerHTML = event.latlng.lat;
              document.getElementById("longitude").innerHTML = event.latlng.lng;
+
+          
+
+             document.getElementById('theFormId').setAttribute('action', `/coordinate/location/${event.latlng.lat}/${event.latlng.lng}?_method=PUT`);
+
+                        
+                      
+            
           
              //only allows one marker wahoo-it works
              if (mymap.hasLayer(marker)) {
               mymap.removeLayer(marker); // remove
           }
- 
+ //tag username to marker
 const Uname = document.getElementById("userName")
 //adding marker
        marker= L.marker([event.latlng.lat, event.latlng.lng], {icon: greenIcon,
@@ -112,14 +109,10 @@ const Uname = document.getElementById("userName")
         }).addTo(mymap).on('click', function(e) {
           alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng);
           document.getElementById("latitude").innerHTML = e.latlng.lat;
-        
-        })
-          
-        
+         })   
+         
           ;})
          
-         
-
       </script> 
      
 
@@ -127,13 +120,18 @@ const Uname = document.getElementById("userName")
     <div>latitude: <span id="latitude"></span></div><br>
     <div>longitude: <span id="longitude"></span></div>
 <div></div>
+
+<div ><span id="rlink"></span></div>
+
+
     <section class="right row">
         <div class="col s20 push-s1000">
             <p hidden><span id="userName">User Name: <%= user.userName %></span></p>
             
-
-    </section>
-      
+            <script>
+              const myElement = document.getElementById("");</script>
+    
+   
       </div>  
     </div>
   </div>
