@@ -112,7 +112,8 @@ const Uname = document.getElementById("userName")
          })   
          
           ;})
-         
+          
+          
       </script> 
      
 
@@ -129,8 +130,20 @@ const Uname = document.getElementById("userName")
             <p hidden><span id="userName">User Name: <%= user.userName %></span></p>
             
             <script>
-              const myElement = document.getElementById("");</script>
-    
+              const myElement = document.getElementById("");
+              
+            </script>
+            <script>
+              console.log('a')
+              L.control.locate(
+                {
+                  flyTo: true,
+                  strings: {title: "Zoom to current location"},
+                  icon: "fa fa-map-pin",
+                  locateOptions: {maxZoom: 16}
+                }
+              ).addTo(mymap);
+              </script>
    
       </div>  
     </div>
