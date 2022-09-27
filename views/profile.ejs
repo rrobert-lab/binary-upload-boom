@@ -40,15 +40,11 @@
         // Making a map and tiles
         
         
-       var maxBounds = L.latLngBounds(
-        L.latLng( 40.700, -74.41), //Southwest
-        L.latLng(40.770, -73.541)  //Northeast
-    );// can be changed by state
+      // can be changed by state
         const mymap = L.map('issMap', {
           'center': [40.7279101090076, -73.9925114575458],
           'zoom': 14,
-          'maxBounds': maxBounds,
-         
+                
       });
       //
      
@@ -134,7 +130,7 @@ const Uname = document.getElementById("userName")
               
             </script>
             <script>
-              console.log('a')
+            
               L.control.locate(
                 {
                   flyTo: true,
@@ -143,6 +139,8 @@ const Uname = document.getElementById("userName")
                   locateOptions: {maxZoom: 16}
                 }
               ).addTo(mymap);
+
+              console.log(mymap.getBounds());
               </script>
    
       </div>  
