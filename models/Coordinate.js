@@ -10,14 +10,18 @@ const CoordinateSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  userName: {
+    type: String,
+    ref: "User",
   },
+  
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 

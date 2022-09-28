@@ -1,6 +1,5 @@
 
 const Comment = require("../models/Comment");
-
 module.exports = {
   
   createComment: async (req, res) => {
